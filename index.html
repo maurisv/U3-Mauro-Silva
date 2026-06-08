@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Formas</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    overflow:hidden;
+}
+
+header{
+    position:absolute;
+    top:30px;
+    width:100%;
+    text-align:center;
+    z-index:100;
+}
+
+h1{
+    font-size:3rem;
+    color:#222;
+}
+
+p{
+    margin-top:10px;
+    color:#666;
+}
+
+#contenedor{
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+
+/* Formas */
+
+.forma{
+    position:absolute;
+    transition:0.4s ease;
+    cursor:pointer;
+}
+
+.forma:hover{
+    transform:scale(1.2);
+}
+
+.circulo{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#E1AA00;
+}
+
+.cuadrado{
+    width:80px;
+    height:80px;
+    background:#73CAE7;
+}
+
+.triangulo{
+    width:0;
+    height:0;
+    border-left:40px solid transparent;
+    border-right:40px solid transparent;
+    border-bottom:80px solid #D02638;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div id="contenedor"></div>
+
+<script>
+
+const contenedor = document.getElementById("contenedor");
+
+function crearForma(tipo){
+
+    const forma = document.createElement("div");
+
+    forma.classList.add("forma");
+    forma.classList.add(tipo);
+
+    const ancho = window.innerWidth - 120;
+    const alto = window.innerHeight - 120;
+
+    forma.style.left = Math.random() * ancho + "px";
+    forma.style.top = Math.random() * alto + "px";
+
+    contenedor.appendChild(forma);
+}
+
+/* 3 círculos */
+
+for(let i = 0; i < 3; i++){
+    crearForma("circulo");
+}
+
+/* 4 cuadrados */
+
+for(let i = 0; i < 4; i++){
+    crearForma("cuadrado");
+}
+
+/* 3 triángulos */
+
+for(let i = 0; i < 3; i++){
+    crearForma("triangulo");
+}
+
+</script>
+
+</body>
+</html>
