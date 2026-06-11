@@ -1,128 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generador de Formas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dale Forma</title>
 
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family: Arial, sans-serif;
-    background:#f5f5f5;
-    overflow:hidden;
-}
-
-header{
-    position:absolute;
-    top:30px;
-    width:100%;
-    text-align:center;
-    z-index:100;
-}
-
-h1{
-    font-size:3rem;
-    color:#222;
-}
-
-p{
-    margin-top:10px;
-    color:#666;
-}
-
-#contenedor{
-    width:100vw;
-    height:100vh;
-    position:relative;
-}
-
-/* Formas */
-
-.forma{
-    position:absolute;
-    transition:0.4s ease;
-    cursor:pointer;
-}
-
-.forma:hover{
-    transform:scale(1.2);
-}
-
-.circulo{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:#E1AA00;
-}
-
-.cuadrado{
-    width:80px;
-    height:80px;
-    background:#73CAE7;
-}
-
-.triangulo{
-    width:0;
-    height:0;
-    border-left:40px solid transparent;
-    border-right:40px solid transparent;
-    border-bottom:80px solid #D02638;
-}
-
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <section class="hero">
 
-<div id="contenedor"></div>
+        <img src="assets/daleforma.png" alt="Dale Forma" class="logo">
 
-<script>
+        <!-- Amarillos -->
+        <div class="shape circle c1"></div>
+        <div class="shape circle c2"></div>
+        <div class="shape circle c3"></div>
 
-const contenedor = document.getElementById("contenedor");
+        <!-- Rojos -->
 
-function crearForma(tipo){
+<img src="assets/triangulo.png" class="shape triangulo t1" alt="">
+<img src="assets/triangulo.png" class="shape triangulo t2" alt="">
+<img src="assets/triangulo.png" class="shape triangulo t3" alt="">
 
-    const forma = document.createElement("div");
+        <!-- Azules -->
+        <div class="shape square s1"></div>
+        <div class="shape square s2"></div>
+        <div class="shape square s3"></div>
 
-    forma.classList.add("forma");
-    forma.classList.add(tipo);
+<img src="assets/rectangulo.png" class="shape rectangulo r1" alt="">
+<img src="assets/rectangulo.png" class="shape rectangulo r2" alt="">
+<img src="assets/rectangulo.png" class="shape rectangulo r3" alt="">
 
-    const ancho = window.innerWidth - 120;
-    const alto = window.innerHeight - 120;
+        <!-- Verdes -->
 
-    forma.style.left = Math.random() * ancho + "px";
-    forma.style.top = Math.random() * alto + "px";
+<img src="assets/barra.png" class="shape barra b2" alt="">
+<img src="assets/barra.png" class="shape barra b3" alt="">
 
-    contenedor.appendChild(forma);
-}
+<img src="assets/curva.png" class="shape curva a1" alt="">
+<img src="assets/curva.png" class="shape curva a2" alt="">
+<img src="assets/curva.png" class="shape curva a3" alt="">
 
-/* 3 círculos */
+    </section>
 
-for(let i = 0; i < 3; i++){
-    crearForma("circulo");
-}
+    <section class="transformacion-scroll">
 
-/* 4 cuadrados */
+    <div class="sticky-gallery">
 
-for(let i = 0; i < 4; i++){
-    crearForma("cuadrado");
-}
+        <div class="panel active">
+            <img src="assets/EXPLORACION2.png" alt="">
+        </div>
 
-/* 3 triángulos */
+        <div class="panel">
+            <img src="assets/CONSTRUCCIÓN.png" alt="">
+        </div>
 
-for(let i = 0; i < 3; i++){
-    crearForma("triangulo");
-}
+        <div class="panel">
+            <img src="assets/CREAR.png" alt="">
+        </div>
 
-</script>
+        <div class="panel">
+            <img src="assets/TRANSFORMACION.png" alt="">
+        </div>
+
+    </div>
+
+</section>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
