@@ -1258,22 +1258,3 @@ SECCIÓN CARTAS */
     font-weight: 500;
 }
 
-/* --- BOTÓN ESTILO PREMIUM --- */
-.btn-experiencia {
-    background: #5b4343; /* Invierte el color: botón oscuro para romper el diseño claro */
-    color: #ffffff;
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
-    font-weight: 700;
-    padding: 18px 45px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(91, 67, 67, 0.2);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.btn-experiencia:hover {
-    transform: scale(1.06);
-    background: #473333; /* Un tono café levemente más profundo al pasar el cursor */
-    box-shadow: 0 15px 30px rgba(91, 67, 67, 0.35);
-}
