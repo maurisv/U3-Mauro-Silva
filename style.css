@@ -1277,7 +1277,3 @@ SECCIÓN CARTAS */
     background: #473333; /* Un tono café levemente más profundo al pasar el cursor */
     box-shadow: 0 15px 30px rgba(91, 67, 67, 0.35);
 }
-
-.btn-experiencia:active {
-    transform: scale(0.98);
-}
