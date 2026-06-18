@@ -7,71 +7,261 @@
     <title>Dale Forma</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link href="https://use.typekit.net/jjq5bmy.css" rel="stylesheet">
 </head>
 
 <body>
 
     <section class="hero">
 
+
         <img src="assets/daleforma.png" alt="Dale Forma" class="logo">
 
-        <!-- Amarillos -->
+        <h2 id="dynamicSubtitle" class="dynamic-subtitle">
+    ¡Construye, junta y gana!
+</h2>
+
         <div class="shape circle c1"></div>
         <div class="shape circle c2"></div>
         <div class="shape circle c3"></div>
 
-        <!-- Rojos -->
+        <img src="assets/triangulo.png" class="shape triangulo t1" alt="">
+        <img src="assets/triangulo.png" class="shape triangulo t2" alt="">
+        <img src="assets/triangulo.png" class="shape triangulo t3" alt="">
 
-<img src="assets/triangulo.png" class="shape triangulo t1" alt="">
-<img src="assets/triangulo.png" class="shape triangulo t2" alt="">
-<img src="assets/triangulo.png" class="shape triangulo t3" alt="">
-
-        <!-- Azules -->
         <div class="shape square s1"></div>
         <div class="shape square s2"></div>
         <div class="shape square s3"></div>
 
-<img src="assets/rectangulo.png" class="shape rectangulo r1" alt="">
-<img src="assets/rectangulo.png" class="shape rectangulo r2" alt="">
-<img src="assets/rectangulo.png" class="shape rectangulo r3" alt="">
+        <img src="assets/rectangulo.png" class="shape rectangulo r1" alt="">
+        <img src="assets/rectangulo.png" class="shape rectangulo r2" alt="">
+        <img src="assets/rectangulo.png" class="shape rectangulo r3" alt="">
 
-        <!-- Verdes -->
+        <img src="assets/barra.png" class="shape barra b2" alt="">
+        <img src="assets/barra.png" class="shape barra b3" alt="">
 
-<img src="assets/barra.png" class="shape barra b2" alt="">
-<img src="assets/barra.png" class="shape barra b3" alt="">
-
-<img src="assets/curva.png" class="shape curva a1" alt="">
-<img src="assets/curva.png" class="shape curva a2" alt="">
-<img src="assets/curva.png" class="shape curva a3" alt="">
+        <img src="assets/curva.png" class="shape curva a1" alt="">
+        <img src="assets/curva.png" class="shape curva a2" alt="">
+        <img src="assets/curva.png" class="shape curva a3" alt="">
 
     </section>
 
-    <section class="transformacion-scroll">
+    <section class="fall-section" id="crea-construye">
 
-    <div class="sticky-gallery">
-
-        <div class="panel active">
-            <img src="assets/EXPLORACION2.png" alt="">
+        <div class="fall-container">
+            <img src="assets/01.png" class="fall-shape shape01" alt="">
+            <img src="assets/02.png" class="fall-shape shape02" alt="">
+            <img src="assets/03.png" class="fall-shape shape03" alt="">
+            <img src="assets/04.png" class="fall-shape shape04" alt="">
+            <img src="assets/05.png" class="fall-shape shape05" alt="">
+            <img src="assets/06.png" class="fall-shape shape06" alt="">
+            <img src="assets/07.png" class="fall-shape shape07" alt="">
+            <img src="assets/08.png" class="fall-shape shape08" alt="">
         </div>
 
-        <div class="panel">
-            <img src="assets/CONSTRUCCIÓN.png" alt="">
-        </div>
+        <div class="fall-content">
+            <h2>¡Empieza a Darle Forma!</h2>
+            
+            <p>
+                Dale Forma es un juego que explora infinitas posibilidades usando tu creatividad utilizando piezas y conectores.
+                Pone a prueba tu imaginación y habilidades para construir composiciones únicas y competir con amigos.
+            </p>
 
-        <div class="panel">
-            <img src="assets/CREAR.png" alt="">
-        </div>
+        <div class="fall-buttons-container">
+    <a href="#como-se-juega" class="btn-nav btn-custom">
+        <img src="assets/boton01.png" alt="Botón Cómo se juega">
+        <span>¿Cómo jugar?</span>
+    </a>
+    <a href="#componentes" class="btn-nav btn-custom">
+        <img src="assets/boton02.png" alt="Botón Componentes">
+        <span>Componentes</span>
+    </a>
+    <a href="#galeria" class="btn-nav btn-custom">
+        <img src="assets/boton03.png" alt="Botón Galería">
+        <span>Galería</span>
+    </a>
+    <a href="#experiencia" class="btn-nav btn-custom">
+        <img src="assets/boton04.png" alt="Botón Experiencia">
+        <span>Experiencia</span>
+    </a>
+</div>
 
-        <div class="panel">
-            <img src="assets/TRANSFORMACION.png" alt="">
-        </div>
+    </section> 
+    
+    <section class="how-section" id="como-se-juega">
+
+        <div class="how-grid">
+            <div class="how-item">
+                <div class="how-info-row">
+                    <span class="how-number">01</span>
+                    <h3>¡Construye y gana!</h3>
+                    <p>Crea composiciones utilizando las piezas del set, el vocero de partida elige la mejor creación y gana fichas.</p>
+                </div>
+                <div id="model1"></div>
+            </div>
+
+            <div class="how-item">
+                <div class="how-info-row">
+                    <span class="how-number">02</span>
+                    <h3>¡Compra con fichas!</h3>
+                    <p>Utiliza las fichas obtenidas para comprar cartas de beneficio y forma. Cada carta cuesta 3 fichas.</p>
+                </div>
+                <div id="model2"></div>
+            </div>
+
+        <div class="how-item">
+    <div class="how-info-row">
+        <span class="how-number">03</span>
+        <h3>¡Reune cartas forma!</h3>
+        <p>Compra cartas del mazo especial, encuentra y reúne las 5 cartas que conforman la palabra Forma y obtén la victoria.</p>
+    </div>
+    <div id="model3"></div>
+</div>
+
+    </section>
+
+    
+    <section class="components-section" id="componentes">
+
+    <div class="components-container">
+
+        <!-- PIEZAS -->
+
+<h3 class="titulo-piezas">PIEZAS</h3>
+
+
+
+     <div class="pieces-row">
+    <img src="assets/01.png" alt="Pieza 01" class="pieza01">
+    <img src="assets/02.png" alt="Pieza 02" class="pieza02">
+    <img src="assets/03.png" alt="Pieza 03" class="pieza03">
+    <img src="assets/04.png" alt="Pieza 04" class="pieza04">
+    <img src="assets/05.png" alt="Pieza 05" class="pieza05">
+    <img src="assets/06.png" alt="Pieza 06" class="pieza06">
+    <img src="assets/07.png" alt="Pieza 07" class="pieza07">
+    <img src="assets/08.png" alt="Pieza 08" class="pieza08">
+    <img src="assets/conector1.png" alt="Conector 01" class="conector01">
+    <img src="assets/conector2.png" alt="Conector 02" class="conector02">
+</div>
+        
+<p class="descripcion-piezas">
+    Inicias la partida con un set de 20 piezas, 2 de cada una. Estas te permitirán construir distintos elementos dependiendo la carta de juego.
+</p>
+
+        <!-- CARTAS -->
+
+<h3 class="titulo-cartas">CARTAS</h3>
+ 
+<p class="descripcion-cartas">
+    
+</p>
+
+<div class="cartas-layout">
+
+<div class="cartas-info">
+
+    <h4 id="cardTitle" class="card-title">
+        Carta de Construcción
+    </h4>
+
+    <p id="cardDescription" class="card-description">
+        Construye una composición utilizando las piezas del set.
+    </p>
+
+</div>
+      <p id="cardDescription" class="card-description">
+</p>
 
     </div>
 
+    <div class="cards-gallery">
+
+
+        <button class="card-arrow left">&#10094;</button>
+
+        <div class="cards-container">
+
+            <img src="assets/carta1.png" class="card">
+            <img src="assets/carta2.png" class="card">
+            <img src="assets/carta3.png" class="card">
+            <img src="assets/carta4.png" class="card">
+
+        </div>
+
+        <button class="card-arrow right">&#10095;</button>
+
+    </div>
+
+</div>
+
+        <!-- TIEMPO -->
+
+<h3 class="titulo-tiempo"></h3>
+
+
+<div class="tiempo-content">
+    <img src="assets/relojdearena.png" alt="Reloj de arena" class="reloj-img">
+
+  <div class="tiempo-layout">
+
+
+    <div class="tiempo-info">
+        <h4 class="tiempo-frase">
+            ¡Tienes 60 segundos para construir!
+        </h4>
+    </div>
+
+</div>
+</div>
 </section>
 
+<section class="gallery-main-section" id="galeria">
+        <h2 class="gallery-main-title">GALERÍA</h2>
+        
+        <div class="gallery-main-carousel">
+            <div class="gallery-main-container" id="galleryContainer">
+                <img src="assets/foto.jpg" class="gallery-photo" data-index="0" alt="Creación Base">
+                <img src="assets/foto1.jpg" class="gallery-photo" data-index="1" alt="Creación 1">
+                <img src="assets/foto2.jpg" class="gallery-photo" data-index="2" alt="Creación 2">
+                <img src="assets/foto3.jpg" class="gallery-photo" data-index="3" alt="Creación 3">
+                <img src="assets/foto4.png" class="gallery-photo" data-index="4" alt="Creación 4">
+                <img src="assets/foto5.png" class="gallery-photo" data-index="5" alt="Creación 5">
+                <img src="assets/foto6.png" class="gallery-photo" data-index="6" alt="Creación 6">
+            </div>
+        </div>
+    </section>
+
+<section id="experiencia" class="experiencia-section">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+
+    <div class="experiencia-container">
+        <h2 class="experiencia-titulo">EXPERIENCIA</h2>
+        <p class="experiencia-subtexto">
+            Sumérgete en una dinámica única donde la creatividad, la velocidad y la estrategia se juntan en cada partida. ¿Estás listo para descubrirlo?
+        </p>
+        <button class="btn-experiencia">Conoce la Experiencia</button>
+    </div>
+</section>
+
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js"
+        }
+      }
+    </script>
+
+    <script type="module" src="./three-scene.js"></script>
     <script src="script.js"></script>
 
 </body>
-
 </html>
