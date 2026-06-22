@@ -104,3 +104,8 @@ animate();
 
     config.forEach(item => createScene(item.id, item.path));
 });
+
+const container = document.getElementById("fundamento3d");
+
+
+

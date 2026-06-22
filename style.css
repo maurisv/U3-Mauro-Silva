@@ -580,7 +580,7 @@ body {
     font-family: "Konkhmer Sleokchher", serif;
     font-size: 3rem;
     font-weight: 800;
-    text-align: left;
+    text-align: center;
     color: #75cae7;
     margin-bottom: 30px;
 }
@@ -1022,6 +1022,125 @@ SECCIÓN CARTAS */
         opacity 0.8s ease;
 }
 
+/* ================================= */
+/* FUNDAMENTO */
+/* ================================= */
+
+.fundamento-section{
+    width:100vw;
+    min-height:100vh;
+
+    background: rgba(243, 237, 227, 0.75);
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+
+    position:relative;
+    z-index:10;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:80px 20px;
+}
+
+.fundamento-container {
+    background: transparent;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    width:100%;
+    max-width:1200px;
+
+    padding:100px;
+}
+
+
+.fundamento-title {
+    font-family: "Konkhmer Sleokchher", serif;
+    font-size: clamp(3rem, 2vw, 5rem);
+    color: #5b4343;
+    margin-bottom: 30px;   
+}
+
+.fundamento-intro {
+  max-width: 850px;
+    margin: 0 0 70px 0;
+
+    font-family: "obliqua", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(0,0,0,.75);
+}
+    
+
+.fundamento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: left;
+}
+
+.fundamento-card {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 28px;
+
+    padding: 40px 30px;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    text-align: left;
+
+    transition: all .3s ease;
+}
+
+.fundamento-card:hover {
+    transform: translateY(-8px);
+    
+}
+
+.fundamento-card h3 {
+    font-family: "Konkhmer Sleokchher", serif;
+    color: #60b44f;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    
+}
+
+.fundamento-card p {
+    font-family: "obliqua", sans-serif;
+    color: rgba(0,0,0,.7);
+    line-height: 1.7;
+    text-align: left;
+    
+}
+
+.fundamento-layout{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:80px;
+}
+
+.fundamento-text{
+    flex:1;
+}
+
+#fundamento3d{
+    width:450px;
+    height:450px;
+    cursor:pointer;
+}
+
+@media (max-width: 900px) {
+    .fundamento-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* ================================= */
 /* SECCIÓN NUEVA: GALERÍA PRINCIPAL  */
@@ -1163,6 +1282,52 @@ SECCIÓN CARTAS */
     
 }
 
+#arrow{
+    position:absolute;
+    left:35%;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:3rem;
+    color:white;
+    z-index:100;
+    pointer-events:none;
+}
+
+.composition-wrapper{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:40px;
+    margin-bottom:30px;
+    pointer-events:auto;
+}
+
+#shapeComposition{
+    position:relative;
+    width:550px;
+    height:350px;
+
+    margin-left:180px;
+
+    cursor:pointer;
+}
+.shape-piece{
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    object-fit:contain;
+
+    transition:
+        left 1.2s cubic-bezier(.22,.61,.36,1),
+        top 1.2s cubic-bezier(.22,.61,.36,1),
+        transform 1.2s cubic-bezier(.22,.61,.36,1);
+
+    user-select:none;
+    pointer-events:none;
+}
 /* --- CONFIGURACIÓN DE LOS BLOBS (MANCHAS DE COLOR) --- */
 .blob {
     position: absolute;
@@ -1244,7 +1409,7 @@ SECCIÓN CARTAS */
 
 .experiencia-titulo {
     font-family: "Konkhmer Sleokchher", serif;
-    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+    font-size: clamp(2.0rem, 4.0vw, 3.5rem);
     color: #5b4343; /* Tu color café oscuro para un contraste orgánico perfecto */
     margin: 0 0 20px 0;
     font-weight: 700;
@@ -1254,7 +1419,120 @@ SECCIÓN CARTAS */
     color: #5b4343;
     font-size: clamp(1.05rem, 1.6vw, 1.25rem);
     line-height: 1.6;
-    margin: 0 0 45px 0;
+    margin: 0 0 px 0;
     font-weight: 500;
+    text-align: left;
 }
 
+/* ================================= */
+/* BOTÓN EXPERIENCIA 2 (GITHUB LINK) */
+/* ================================= */
+
+.btn-experiencia2 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    height: 95px;
+    width: 320px;
+
+    border-radius: 18px;
+    overflow: hidden;
+
+    /* estilo acorde a tu paleta */
+    background: linear-gradient(135deg, #5b4343, #3f2d2d);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow: 0 12px 28px rgba(91, 67, 67, 0.25);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+/* TEXTO */
+/* ================================= */
+/* BOTONES EXPERIENCIA (BASE) */
+/* ================================= */
+
+.btn-experiencia,
+.btn-experiencia2 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    /* 🔽 MÁS PEQUEÑOS */
+    height: 65px;
+    width: 220px;
+
+    border-radius: 16px;
+
+    /* 🔽 TRANSPARENTE */
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: all 0.3s ease;
+}
+
+/* TEXTO */
+.btn-experiencia span,
+.btn-experiencia2 span {
+    font-family: "obliqua", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #5b4343;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+/* ================================= */
+/* HOVER (SE VUELVEN GRISES) */
+/* ================================= */
+
+.btn-experiencia:hover,
+.btn-experiencia2:hover {
+    background: rgba(120, 120, 120, 0.35);
+    border: 1px solid rgba(120, 120, 120, 0.5);
+    transform: translateY(-3px);
+}
+
+/* TEXTO EN HOVER */
+.btn-experiencia:hover span,
+.btn-experiencia2:hover span {
+    color: #f3ede3;
+}
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+
+@media (max-width: 1200px) {
+    .btn-experiencia,
+    .btn-experiencia2 {
+        width: 200px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 650px) {
+    .btn-experiencia,
+    .btn-experiencia2 {
+        width: 100%;
+        height: 55px;
+    }
+
+    .btn-experiencia span,
+    .btn-experiencia2 span {
+        font-size: 0.95rem;
+    }
+}
