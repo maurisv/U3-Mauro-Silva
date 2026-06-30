@@ -22,8 +22,8 @@
 
         <img src="assets/daleforma.png" alt="Dale Forma" class="logo">
 
-        <h2 id="dynamicSubtitle" class="dynamic-subtitle">
-    ¡Construye, junta y gana!
+        <h2 id="dynamicSubtitle" class="dynamic-subtitle" data-reveal>
+    
 </h2>
 
         <div class="shape circle c1"></div>
@@ -65,9 +65,9 @@
         </div>
 
         <div class="fall-content">
-            <h2>¡Empieza a Darle Forma!</h2>
+            <h2 data-reveal>¡Empieza a Darle Forma!</h2>
             
-            <p>
+            <p data-reveal>
                 Dale Forma es un juego que explora infinitas posibilidades usando tu creatividad utilizando piezas y conectores.
                 Pone a prueba tu imaginación y habilidades para construir composiciones únicas y competir con amigos.
             </p>
@@ -85,7 +85,7 @@
         <img src="assets/boton03.png" alt="Botón Galería">
         <span>Galería</span>
     </a>
-    <a href="#experiencia" class="btn-nav btn-custom">
+    <a href="#fundamento" class="btn-nav btn-custom">
         <img src="assets/boton04.png" alt="Botón Experiencia">
         <span>Experiencia</span>
     </a>
@@ -99,8 +99,8 @@
             <div class="how-item">
                 <div class="how-info-row">
                     <span class="how-number">01</span>
-                    <h3>¡Construye y gana!</h3>
-                    <p>Crea composiciones utilizando las piezas del set, el vocero de partida elige la mejor creación y gana fichas.</p>
+                    <h3 data-reveal>¡Construye y gana!</h3>
+                    <p data-reveal>Crea composiciones utilizando las piezas del set, el vocero de partida elige la mejor creación y gana fichas.</p>
                 </div>
                 <div id="model1"></div>
             </div>
@@ -108,8 +108,8 @@
             <div class="how-item">
                 <div class="how-info-row">
                     <span class="how-number">02</span>
-                    <h3>¡Compra con fichas!</h3>
-                    <p>Utiliza las fichas obtenidas para comprar cartas de beneficio y forma. Cada carta cuesta 3 fichas.</p>
+                    <h3 data-reveal>¡Compra con fichas!</h3>
+                    <p data-reveal>Utiliza las fichas obtenidas para comprar cartas de beneficio y forma. Cada carta cuesta 3 fichas.</p>
                 </div>
                 <div id="model2"></div>
             </div>
@@ -117,8 +117,8 @@
         <div class="how-item">
     <div class="how-info-row">
         <span class="how-number">03</span>
-        <h3>¡Reune cartas forma!</h3>
-        <p>Compra cartas del mazo especial, encuentra y reúne las 5 cartas que conforman la palabra Forma y obtén la victoria.</p>
+        <h3 data-reveal>¡Reune cartas forma!</h3>
+        <p data-reveal>Compra cartas del mazo especial, encuentra y reúne las 5 cartas que conforman la palabra Forma y obtén la victoria.</p>
     </div>
     <div id="model3"></div>
 </div>
@@ -132,7 +132,7 @@
 
         <!-- PIEZAS -->
 
-<h3 class="titulo-piezas">COMPONENTES</h3>
+<h3 class="titulo-piezas" data-reveal>COMPONENTES</h3>
 
 
 
@@ -149,7 +149,7 @@
     <img src="assets/conector2.png" alt="Conector 02" class="conector02">
 </div>
         
-<p class="descripcion-piezas">
+<p class="descripcion-piezas" data-reveal>
     Inicias la partida con un set de 20 piezas, 2 de cada una. Estas te permitirán construir distintos elementos dependiendo la carta de juego.
 </p>
 
@@ -165,11 +165,11 @@
 
 <div class="cartas-info">
 
-    <h4 id="cardTitle" class="card-title">
+    <h4 id="cardTitle" class="card-title" data-reveal>
         Carta de Construcción
     </h4>
 
-    <p id="cardDescription" class="card-description">
+    <p id="cardDescription" class="card-description" data-reveal>
         Construye una composición utilizando las piezas del set.
     </p>
 
@@ -182,7 +182,7 @@
     <div class="cards-gallery">
 
 
-        <button class="card-arrow left">&#10094;</button>
+        <button class="card-arrow left"><img src="assets/05.png" alt="Anterior"></button>
 
         <div class="cards-container">
 
@@ -193,58 +193,80 @@
 
         </div>
 
-        <button class="card-arrow right">&#10095;</button>
+        <button class="card-arrow right"><img src="assets/05.png" alt="Siguiente"></button>
 
     </div>
 
 </div>
-
-        <!-- TIEMPO -->
-
-<h3 class="titulo-tiempo"></h3>
 
 
 <div class="tiempo-content">
-    <img src="assets/relojdearena.png" alt="Reloj de arena" class="reloj-img">
 
-  <div class="tiempo-layout">
+    <div class="tiempo-escena">
 
+        <div class="bomba-wrapper">
+            <img src="assets/relojdearena.png" alt="Bomba" class="reloj-img">
+            <img src="assets/fuego.png" alt="Fuego" class="fuego-img">
+        </div>
 
-    <div class="tiempo-info">
-        <h4 class="tiempo-frase">
-            ¡Tienes 60 segundos para construir!
-        </h4>
-    </div>
+        <div class="tiempo-layout">
+            <div class="tiempo-info">
+                <h4 class="tiempo-frase" id="tiempoFrase" data-reveal>
+                    ¡Tienes 60 segundos para construir!
+                </h4>
+            </div>
+        </div>
 
-</div>
-</div>
-</section>
+        <div class="resultado-explosion" id="resultadoExplosion">
 
-<section class="fundamento-section" id="fundamento">
-
-    <div class="fundamento-container">
-<div class="fundamento-layout">
-
-    <div class="fundamento-text">
-        <h2 class="fundamento-title">FUNDAMENTO</h2>
-
-        <p class="fundamento-intro">
-    En base a este principio se propone una propuesta de interacción digital que explora cómo los elementos individuales pueden reunirse para conformar una unidad mayor, donde la 
-transformación no implica únicamente un cambio visual, sino también una modificación del usuario
-      en la manera en que la forma es percibida e interpretada. De este modo, la construcción se 
-      convierte en un proceso dinámico capaz de producir múltiples posibilidades a partir de los 
-      mismos componentes
-        </p>
-    </div>
-<div class="composition-wrapper">
-    <div id="shapeComposition"></div>
+            <div class="resultado-carta">
+    <h4 class="resultado-titulo" data-reveal>Elementos de Cocina</h4>
 </div>
 
+            <div class="resultado-opciones">
+                <div class="resultado-item" data-nombre="Tetera">
+                    <img src="assets/tetera.png" alt="Tetera">
+                    <span>Tetera</span>
+                </div>
+                <div class="resultado-item" data-nombre="Cuchillo">
+                    <img src="assets/cuchillo.png" alt="Cuchillo">
+                    <span>Cuchillo</span>
+                </div>
+                <div class="resultado-item" data-nombre="Plato">
+                    <img src="assets/plato.png" alt="Plato">
+                    <span>Plato</span>
+                </div>
+            </div>
+                <p class="resultado-instruccion" id="resultadoInstruccion">
+        Elige la composición más original y acorde al concepto
+    </p>
+
 </div>
 
-</section>
+<div class="celebracion-overlay" id="celebracionOverlay">
+    <div class="celebracion-texto">¡Excelente elección!</div>
+</div>
+
+        </div><!-- /.resultado-explosion -->
+
+    </div><!-- /.tiempo-escena -->
+
+</div><!-- /.tiempo-content -->
+
+</div>
+
 <section class="gallery-main-section" id="galeria">
-        <h2 class="gallery-main-title">GALERÍA</h2>
+        <h2 class="gallery-main-title" data-reveal>GALERÍA</h2>
+
+        <div class="video-frame">
+            <iframe
+                src="https://www.youtube.com/embed/5RaPpFz2wQU"
+                title="Video Dale Forma"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
         
         <div class="gallery-main-carousel">
             <div class="gallery-main-container" id="galleryContainer">
@@ -259,29 +281,169 @@ transformación no implica únicamente un cambio visual, sino también una modif
         </div>
     </section>
 
-<section id="experiencia" class="experiencia-section">
+<!-- =====================================================
+     SECCIÓN FUNDAMENTO — reemplaza tu sección actual
+     ===================================================== -->
+<!-- =====================================================
+     CONTENEDOR DE FONDO COMPARTIDO
+     El fondo sólido + blobs de color de "experiencia" ahora
+     vive en este wrapper, y se extiende visualmente desde
+     fundamento hasta pix, sin cortes entre secciones.
+     ===================================================== -->
+<div class="fondo-experiencia-wrapper">
+
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
     <div class="blob blob-4"></div>
 
-    <div class="experiencia-container">
-        <h2 class="experiencia-titulo">EXPERIENCIA</h2>
-        <p class="experiencia-subtexto">
-            Sumérgete en una dinámica única donde la creatividad, la velocidad y la estrategia se juntan en cada partida. ¿Estás listo para descubrirlo?
-        </p>
+    <section class="fundamento-section" id="fundamento">
+        <div class="fundamento-container">
+            <div class="fundamento-layout">
 
+                <div class="fundamento-text">
+                    <h2 class="fundamento-title" data-reveal>FUNDAMENTO</h2>
 
-<a href="https://maurisv.github.io/Experiencia" target="_blank" class="btn-experiencia">
-    <span>Experiencia</span>
+                    <p class="fundamento-intro" id="fundamentoIntro">
+                        La propuesta de la interfaz expresiva explora cómo los elementos individuales
+                        se reúnen para poder conformar una unidad mayor, donde la transformación
+                        cumple un rol fundamental, no solo como un cambio visual, sino también como
+                        una modificación del usuario en la manera que percibe y reinterpreta a través
+                        de las mismas figuras concebidas.
+                    </p>
+                </div>
 
+                <!-- Animación de piezas -->
+                <div class="morph-wrapper">
 
-<a href="https://maurisv.github.io/Experiencia-2/" target="_blank" class="btn-experiencia2">
-    <span>Experiencia 2</span>
-</a>
+                    <!-- Stage donde viven las piezas -->
+                    <div id="stage"></div>
 
+                    <!-- Indicador de fase -->
+                    <div id="phase-info">
+                        <div class="morph-dot on" data-i="0"></div>
+                        <div class="morph-dot" data-i="1"></div>
+                        <div class="morph-dot" data-i="2"></div>
+                        <div class="morph-dot" data-i="3"></div>
+                    </div>
 
+                    <!-- Hint de scroll -->
+                    <div id="hint">
+                        <span>Scroll</span>
+                        <div class="chevron"></div>
+                    </div>
+
+                </div><!-- /.morph-wrapper -->
+
+            </div><!-- /.fundamento-layout -->
+        </div><!-- /.fundamento-container -->
+    </section>
+
+    <section id="experiencia" class="experiencia-section">
+        <div class="experiencia-container">
+            <h2 class="experiencia-titulo" data-reveal>EXPERIENCIA</h2>
+            <p class="experiencia-subtexto" data-reveal>
+                Sumérgete en esta interfaz expresiva donde podras construir y transformar tus creaciones en algo único. ¿Estás listo para descubrirlo?
+            </p>
+
+            <a href="https://maurisv.github.io/Experiencia" target="_blank" class="btn-experiencia">
+                <span>Haz click aquí</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="pix" class="pix-section">
+        <div class="pix-container">
+            <h2 class="pix-titulo" data-reveal>PiX</h2>
+
+              <p class="pix-subtexto" data-reveal>
+                La partitura Pix muestra las capas de interacción de la versión juego de mesa de "Dale Forma"
+            </p>
+
+            <div class="pix-viewer-frame">
+                <iframe
+                    class="pix-viewer"
+                    src="https://eadpucv.github.io/pix/#!/import/eyJ0aXRsZSI6IkRhbGUgRm9ybWE6IFByaW1lciBhY2VyY2FtaWVudG8gYWwganVlZ28iLCJsYXlvdXQiOiJwaXgiLCJkZXNjcmlwdGlvbiI6IkVsIG1vbWVudG8gZW4gZWwgcXVlIGVsIHVzdWFyaW8gdGllbmUgc3UgcHJpbWVyIHZpc3Rhem8gYWwganVlZ28gXCJEYWxlIGZvcm1hXCIsIGluc3BlY2Npb25hbmRvIGxhIGNhamEgeSBzdXMgZWxlbWVudG9zLiIsInNjb3JlcyI6W1t7InN0ZXBfdGl0bGUiOiJWaXN0YXpvIGEgbGEgY2FqYSIsInVzZXIiOiJwaXgtc3VycHJpc2VkIEFzw60gcXVlIGVzdGUgZXMgZWwgXCJEYWxlIGZvcm1hXCIiLCJkaWFsb2d1ZSI6IiIsInN5c3RlbSI6IiIsIm5vdGUiOiIifSx7InN0ZXBfdGl0bGUiOiIiLCJ1c2VyIjoiIiwiZGlhbG9ndWUiOiJwaXgtc2VhcmNoIFNlIHNpZW50YSBhIGluc3BlY2Npb25hciBsYSBjYWphIHkgc3VzIGVsZW1lbnRvcyB2aXN1YWxlcyIsInN5c3RlbSI6IiIsIm5vdGUiOiIifSx7InN0ZXBfdGl0bGUiOiIiLCJ1c2VyIjoicGl4LWludHJpZ3VlZCBWYW1vcyBhIHZlciBxdcOpIGRpY2UgZWwgcmV2ZXJzbyIsImRpYWxvZ3VlIjoicGl4LXJvdGF0ZSBEYSB2dWVsdGEgbGEgY2FqYSBwYXJhIGxlZXIgbG8gcXVlIGRpY2UgZGVsIG90cm8gbGFkbyIsInN5c3RlbSI6IiIsIm5vdGUiOiIifSx7InN0ZXBfdGl0bGUiOiIiLCJ1c2VyIjoicGl4LXN1cnByaXNlZCBWYXlhLCDCoXF1ZSBpbnRlcmVzYW50ZXMgc29uIGxvcyBvYmpldG9zIGRlbCBqdWVnbyEiLCJkaWFsb2d1ZSI6InBpeC12aWV3IExlZSBsYXMgZGVzY3JpcGNpw7NuZXMgeSByZXZpc2EgY2FkYSBwaWV6YSBpbHVzdHJhZGEiLCJzeXN0ZW0iOiIiLCJub3RlIjoiIn0seyJzdGVwX3RpdGxlIjoiIiwidXNlciI6InBpeC1zbWlsaW5nIFlhIG1lIGVzdMOhbiBkYW5kbyBnYW5hcyBkZSBqdWdhciIsImRpYWxvZ3VlIjoiIiwic3lzdGVtIjoiIiwibm90ZSI6IiJ9LHsic3RlcF90aXRsZSI6Ikluc3BlY2Npw7NuIGRlbCBpbnRlcmlvciIsInVzZXIiOiIiLCJkaWFsb2d1ZSI6InBpeC1zZWFyY2ggQWJyZSBsYSBjYWphIHkgcmV2aXNhIGEgZGV0YWxsZSBjYWRhIHBpZXphIiwic3lzdGVtIjoicGl4LXNlbmQgTGEgcGFydGUgc3VwZXJpb3IgZGUgbGEgY2FqYSBzZSBkZXNsaXphIHkgc2VwYXJhIHBvciBjb21wbGV0byBkZSBsYSBpbmZlcmlvciIsIm5vdGUiOiIifSx7InN0ZXBfdGl0bGUiOiIiLCJ1c2VyIjoicGl4LXN1cnByaXNlZCDCoVNvbiBtdWNoYXMgcGllemFzIHBhcmEgY29uc3RydWlyISIsImRpYWxvZ3VlIjoiIiwic3lzdGVtIjoiIiwibm90ZSI6IiJ9LHsic3RlcF90aXRsZSI6IiIsInVzZXIiOiIiLCJkaWFsb2d1ZSI6InBpeC1oYW5kIExldmFudGEgZGUgYSBwb2NvIGxhcyBwaWV6YXMgZGUgY29uc3RydWNjacOzbiIsInN5c3RlbSI6InBpeC10YXAxdXAgRWwgZGlzZcOxbyBlcmdvbsOzbWljbyBkZSBsYSBjYWphIHBlcm1pdGUgc2FjYXIgbGFzIHBpZXphcyBkZSBtYW5lcmEgc2VuY2lsbGEiLCJub3RlIjoiIn0seyJzdGVwX3RpdGxlIjoiIiwidXNlciI6InBpeC1oYXBweSDCoVNvbiBkb3MgbWF6b3MhIMKhWSBzb24gdGFudG9zIGNvbmNlcHRvcyEiLCJkaWFsb2d1ZSI6InBpeC1zZWFyY2ggQ29taWVuemEgYSByZXZpc2FyIGxhcyBjYXJ0YXMgZGUgbWFuZXJhIHLDoXBpZGEiLCJzeXN0ZW0iOiJwaXgta2lvc2sgTGEgdGV4dHVyYSBzdWF2ZSBkZSBsYXMgY2FydGFzIGhhY2UgcXVlIHNlIGFkaGllcmFuIGJpZW4gYSBsYXMgeWVtYXMgZGUgc3VzIGRlZG9zIiwibm90ZSI6IiJ9LHsic3RlcF90aXRsZSI6IiIsInVzZXIiOiJwaXgtc21pbGluZyDCoVF1w6kgw7p0aWxlcyBzb24gZXN0YXMgb3RyYXMgcGllemFzISIsImRpYWxvZ3VlIjoicGl4LXNlYXJjaCBPYnNlcnZhIGNvbiBkZXRlbmltaWVudG8gbGFzIHBpZXphcyBwZXF1ZcOxYXMgZGUgdW5pw7NuIiwic3lzdGVtIjoiIiwibm90ZSI6IiJ9LHsic3RlcF90aXRsZSI6IiIsInVzZXIiOiJwaXgtc3VycHJpc2VkIMKhQ3VhbnRhcyBmaWNoYXMhIiwiZGlhbG9ndWUiOiJwaXgtaGFuZDEgU2FjYSBsYSBib2xzYSBkZSBmaWNoYXMgeSBsYXMgb2JzZXJ2YSBzaW4gc2FjYXJsYXMgZGUgc3UgYm9sc2EiLCJzeXN0ZW0iOiJwaXgtY2xvdWQgTGEgYm9sc2Egc2luIGFicmlyc2UgY29udGllbmUgc3Ugdm9sdW1lbiB5IHBlcm1pdGUgdW4gYnVlbmEgYWdhcnJlIiwibm90ZSI6IiJ9LHsic3RlcF90aXRsZSI6IiIsInVzZXIiOiJwaXgtdGhpbmsgwqFCYXN0YSBkZSBpbnNwZWNjacOzbiHCoUVzIGhvcmEgZGUganVnYXIhIiwiZGlhbG9ndWUiOiIiLCJzeXN0ZW0iOiIiLCJub3RlIjoiIn1dXX0="
+                    title="Visualizador PiX de Dale Forma"
+                    width="100%"
+                    frameborder="0"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+</div><!-- /.fondo-experiencia-wrapper -->
+
+<section id="creditos" class="creditos-section">
+
+    <!-- Bloque superior: Herramientas utilizadas -->
+    <div class="creditos-herramientas">
+
+        <!-- Lluvia de figuras decorativa: usa las mismas piezas 01-08 y el
+             mismo motor de animación (.fall-shape) que la sección hero,
+             pero acotada solo a este bloque mediante .fall-container-local -->
+        <div class="fall-container fall-container-local">
+            <img src="assets/01.png" class="fall-shape shape01" alt="">
+            <img src="assets/02.png" class="fall-shape shape02" alt="">
+            <img src="assets/03.png" class="fall-shape shape03" alt="">
+            <img src="assets/04.png" class="fall-shape shape04" alt="">
+            <img src="assets/05.png" class="fall-shape shape05" alt="">
+            <img src="assets/06.png" class="fall-shape shape06" alt="">
+            <img src="assets/07.png" class="fall-shape shape07" alt="">
+            <img src="assets/08.png" class="fall-shape shape08" alt="">
+        </div>
+
+        <p class="pix-wiki-intro" data-reveal>Encuentra más información del proyecto aquí</p>
+
+        <a href="https://wiki.ead.pucv.cl/U3_Taller_IxD_-_Mauro_Silva" target="_blank" rel="noopener" class="btn-experiencia btn-wiki btn-wiki-lg" data-reveal>
+            <span>Wiki Casiopea</span>
+        </a>
+
+        <h3 class="creditos-herramientas-titulo" data-reveal></h3>
+        <div class="creditos-herramientas-row">
+            <img src="assets/h1.png" alt="Herramienta 1" class="herramienta-logo h1">
+            <img src="assets/h2.png" alt="Herramienta 2" class="herramienta-logo h2">
+            <img src="assets/h3.png" alt="Herramienta 3" class="herramienta-logo h3">
+            <img src="assets/h4.png" alt="Herramienta 4" class="herramienta-logo h4">
+            <img src="assets/h5.png" alt="Herramienta 5" class="herramienta-logo h5">
+        </div>
     </div>
+
+    <!-- Franja crema inferior: figuras + créditos institucionales -->
+    <div class="creditos-franja">
+
+        <div class="creditos-figuras-row">
+            <img src="assets/fg1.png" alt="" class="creditos-fig">
+            <img src="assets/fg2.png" alt="" class="creditos-fig">
+            <img src="assets/fg3.png" alt="" class="creditos-fig">
+            <img src="assets/fg4.png" alt="" class="creditos-fig">
+            <img src="assets/fg1.png" alt="" class="creditos-fig">
+            <img src="assets/fg2.png" alt="" class="creditos-fig">
+            <img src="assets/fg3.png" alt="" class="creditos-fig">
+            <img src="assets/fg4.png" alt="" class="creditos-fig">
+        </div>
+
+        <div class="creditos-footer-row">
+            <div class="creditos-logos-institucionales">
+                <img src="assets/pucv.png" alt="Pontificia Universidad Católica de Valparaíso" class="logo-pucv">
+                <img src="assets/ead.png" alt="Escuela de Arquitectura y Diseño" class="logo-ead">
+            </div>
+            <div class="creditos-texto-proyecto">
+                <p data-reveal>Proyecto realizado para el</p>
+                <p data-reveal>Taller de Diseño de Interacción 2026</p>
+            </div>
+            <div class="creditos-texto-autor">
+                <p data-reveal>Diseño Landing e Interfaz Expresiva por Mauro Silva</p>
+            </div>
+        </div>
+
+        <div class="creditos-linea"></div>
+
+        <p class="creditos-copyright" data-reveal>©2026 Dale Forma, Todos los derechos reservados</p>
+
+    </div><!-- /.creditos-franja -->
+
 </section>
 
 

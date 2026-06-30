@@ -12,6 +12,17 @@ html {
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
+
+    /* Habilita el scroll-snap real: sin esto, scroll-snap-align en las
+       secciones no hace nada porque ningún ancestro define el tipo de snap.
+       'y proximity' (antes 'mandatory') ancla las secciones solo cuando el
+       scroll termina cerca de un punto de snap; si el usuario suelta el
+       scroll a medio camino, se queda ahí en vez de ser forzado a la
+       sección más cercana. Esto da una sensación más suave que 'mandatory',
+       que siempre fuerza el anclaje. La sección .fundamento-section sigue
+       capturando el scroll internamente (vía JS, ver morphWheelHandler en
+       script.js) antes de soltarlo a la siguiente sección. */
+    scroll-snap-type: y proximity;
 }
 
 body {
@@ -26,11 +37,20 @@ body {
 .fall-section,
 .how-section,
 .components-section,
+.gallery-main-section,
+.fundamento-section,
+.experiencia-section,
+.pix-section,
+.creditos-section,
 .carousel-section {
     width: 100vw;
     min-height: 100vh;
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    /* "normal" en vez de "always": permite que el usuario atraviese una
+       sección de corrido con un scroll rápido sin que el navegador la
+       fuerce a detenerse ahí. Combinado con scroll-snap-type: y proximity,
+       el snap se siente como una sugerencia suave en vez de un freno duro. */
+    scroll-snap-stop: normal;
 }
 
 /* ================================= */
@@ -64,6 +84,7 @@ body {
     position: absolute;
     top: 63%;
     left: 50%;
+    --reveal-base: translateX(-50%);
     transform: translateX(-50%);
 
     width: 100%;
@@ -163,9 +184,6 @@ body {
 .a2 { top: 50%; left: 20px; }
 .a3 { top: 75%; left: 65%; }
 
-/* ================================= */
-/* SECCIÓN CAÍDA (FALL SECTION - SECCIÓN 2) */
-/* ================================= */
 /* ================================= */
 /* SECCIÓN CAÍDA (FALL SECTION - SECCIÓN 2) */
 /* ================================= */
@@ -543,20 +561,26 @@ body {
 .components-section {
     width: 100vw;            /* Ocupa el 100% del ancho de la pantalla */
     min-height: 100vh;
-    min-height: 100vh;
+    height: auto;             /* Permite que la sección crezca según su contenido real
+                                  (título + piezas + cartas + temporizador), que supera
+                                  los 100vh. Con height:auto + overflow visible, el snap
+                                  ancla el INICIO de la sección arriba y el resto se ve
+                                  con scroll normal en vez de quedar recortado. */
 
     background: rgba(243, 237, 227, 0.75);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
 
     position: relative;
-    z-index: 10;           /* Ocupa el 100% del ancho de la pantalla */      /* Ocupa el 100% del alto de la pantalla */
+    z-index: 10;
     
     display: flex;
     flex-direction: column;  /* Alinea el contenido hacia abajo (título -> texto esmerilado -> tarjetas) */
     justify-content: center; /* Centrado vertical perfecto */
     align-items: center;
-    overflow: hidden;        /* Evita que las figuras que caen generen barras de scroll molestas */
+    overflow: visible;       /* Antes "hidden": recortaba el contenido que excede 100vh
+                                 e impedía que el scroll-snap dejara ver el resto de la
+                                 sección (cartas, temporizador). */
     padding: 40px 20px;      /* Espacio de seguridad para pantallas pequeñas */
     box-sizing: border-box;
 }
@@ -578,10 +602,10 @@ body {
 
 .titulo-piezas {
     font-family: "Konkhmer Sleokchher", serif;
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 800;
     text-align: center;
-    color: #75cae7;
+    color: #5b4343;
     margin-bottom: 30px;
 }
 
@@ -632,7 +656,10 @@ body {
 
     margin: 0 auto 40px auto;
 
-    text-align: left;
+    text-align: center;
+
+    scroll-snap-align: center; 
+    scroll-margin-top: 20px;
 }
 
 .pieces-row {
@@ -661,7 +688,7 @@ body {
 }
 
 .pieces-row img:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(-6deg);
 
     filter: drop-shadow(
         0 10px 20px rgba(0,0,0,0.1)
@@ -712,65 +739,21 @@ body {
     text-align: left;
 }
 
-.components-section .descripcion-piezas {
-    font-family: "obliqua", serif !important;
-    font-size: 1.6rem;
-    line-height: 1.8;
-    font-weight: 510;
-
-    color: rgba(0,0,0,.75);
-
-    max-width: 1200px;
-    width: 100%;
-
-    margin: 0 auto 40px auto;
-
-    text-align: center;
-
-    scroll-snap-align: center; 
-    scroll-margin-top: 20px;
-}
-
-
-SECCIÓN CARTAS */
+/* SECCIÓN CARTAS */
 
 .cartas-title {
     text-align: left;
     width: 100%;
-
 }
 
 .components-section .descripcion-cartas {
     font-family: "obliqua", sans-serif !important;
-
     font-size: 1.6rem !important;
-
     font-weight: 700 !important;
-
     text-align: left;
-
     width: 100%;
-
-    font-family: "obliqua", sans-serif;
-    font-size: 2rem;
     line-height: 1.8;
-}
-
-.components-section .descripcion-cartas {
-    font-family: "obliqua", sans-serif !important;
-
-    font-size: 1.6rem !important;
-
-    font-weight: 700 !important;
-
-    text-align: left;
-
-    width: 100%;
-
-    font-family: "obliqua", sans-serif;
     font-size: 2rem;
-    line-height: 1.8;
-    
 }
 
 .cartas-layout{
@@ -920,36 +903,33 @@ SECCIÓN CARTAS */
 
     background:none;
 
-    font-size:3rem;
-
     cursor:pointer;
 
-    color:#5b4343;
-
     transition:.3s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-arrow img {
+    width: 3rem;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    transform: rotate(90deg);
+}
+
+.card-arrow.left img {
+    transform: rotate(-90deg);
 }
 
 .card-arrow:hover{
     transform:scale(1.15);
 }
 
-.card-description{
-    font-family:"obliqua", sans-serif;
-    font-size:2rem;
-    line-height:1.8;
 
-    color:rgba(0,0,0,.75);
 
-    margin-top:20px;
-
-    opacity:1;
-
-    transition:opacity .5s ease;
-}
-
-.card-description.fade{
-    opacity:0;
-}
 
 .tiempo-content {
     display: flex;
@@ -994,162 +974,302 @@ SECCIÓN CARTAS */
 
     line-height: 1.2;
     transform:
-        translateX(150px)
-        translateY(-370px);
+        translateX(180px)
+        translateY(-230px);
 
     
 }
 
-.reloj-img {
-    width: 400px; /* más pequeño */
+.tiempo-escena {
+    position: relative;
+    width: 100%;
+    min-height: 750px; /* antes 500px: más espacio para que el scroll alcance a accionar la bomba */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    height: auto;
-
+.bomba-wrapper {
+    position: relative;
+    width: 380px;
     align-self: flex-start;
 
     margin-left: -200px;
-    margin-top: -240px;
+    margin-top: 80px; /* antes -100px: la bajamos */
 
-    opacity: 0.2;
+    opacity: 0;
+    transform: translateY(120px) rotate(8deg) scale(0.5);
+    transform-origin: center center;
 
-    transform:
-        translateY(120px)
-        rotate(8deg)
-        scale(0.5);
-
-    transition:
-        transform 0.2s linear,
-        opacity 0.8s ease;
+    transition: opacity 0.15s ease;
 }
 
-/* ================================= */
-/* FUNDAMENTO */
-/* ================================= */
-
-.fundamento-section{
-    width:100vw;
-    min-height:100vh;
-
-    background: rgba(243, 237, 227, 0.75);
-
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-
-    position:relative;
-    z-index:10;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:80px 20px;
+.tiempo-frase {
+    --reveal-base: translateX(180px) translateY(80px);
+    transform: translateX(180px) translateY(80px); /* antes -130px: la bajamos también */
+    transition: opacity 0.4s ease;
 }
 
-.fundamento-container {
-    background: transparent;
-
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-
-    width:100%;
-    max-width:1200px;
-
-    padding:100px;
+.reloj-img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
+.fuego-img {
+    position: absolute;
+    left: 86%;
+    top: 24%;
+    width: 35%;
+    transform: translate(100%, -50%) scale(0.9);
+    opacity: 0;
+    transform-origin: center center;
+    pointer-events: none;
+}
 
-.fundamento-title {
-    font-family: "Konkhmer Sleokchher", serif;
-    font-size: clamp(3rem, 2vw, 5rem);
+.fuego-encendido {
+    opacity: 1;
+    animation: fuegoFlicker 0.5s infinite alternate;
+}
+
+@keyframes fuegoFlicker {
+    0%   { transform: translate(-50%, -50%) scale(0.8) rotate(-4deg); filter: brightness(1) drop-shadow(0 0 4px rgba(255,150,0,0.5)); }
+    100% { transform: translate(-50%, -50%) scale(1.05) rotate(4deg); filter: brightness(1.4) drop-shadow(0 0 14px rgba(255,150,0,0.9)); }
+}
+
+.explosion-flash {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,220,120,0.95) 0%, rgba(255,120,0,0.6) 35%, transparent 70%);
+    pointer-events: none;
+    animation: flashOut 0.45s ease-out forwards;
+    z-index: 5;
+    
+}
+
+@keyframes flashOut {
+    0%   { opacity: 1; transform: scale(0.2); }
+    100% { opacity: 0; transform: scale(2.2); }
+}
+
+.explosion-particle {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 6;
+    animation: particleFly 1.3s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes particleFly {
+    0%   { transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.4); opacity: 0; }
+}
+
+.tiempo-frase {
+    --reveal-base: translateX(180px) translateY(-200px);
+    transform: translateX(180px) translateY(-200px);
+    transition: opacity 0.4s ease;
+}
+
+.resultado-explosion {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+
+    opacity: 0;
+    transform: translateY(-200px) scale(0.9);
+
+    pointer-events: none;
+
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.resultado-explosion.visible {
+    opacity: 1;
+    transform: translateY(-180) scale(1.3);
+    pointer-events: auto;
+}
+
+.resultado-carta {
+    display: flex;
+    justify-content: center;
+}
+
+.resultado-titulo {
+    font-family: "obliqua", sans-serif;
+    font-size: 5rem; /* mismo tamaño que .tiempo-frase */
     color: #5b4343;
-    margin-bottom: 30px;   
+    text-align: center;
+    margin: 0;
+    line-height: 1.2;
 }
 
-.fundamento-intro {
-  max-width: 850px;
-    margin: 0 0 70px 0;
+.resultado-opciones {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 140px;
+}
 
+.resultado-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.resultado-item img {
+    width: 280px;
+    height: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.resultado-item span {
     font-family: "obliqua", sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: rgba(0,0,0,.75);
-}
-    
-
-.fundamento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    text-align: left;
+    font-size: 1.3rem;
+    color: #5b4343;
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 
-.fundamento-card {
-    background: rgba(255,255,255,.18);
-    border: 1px solid rgba(255,255,255,.4);
-    border-radius: 28px;
-
-    padding: 40px 30px;
-
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    text-align: left;
-
-    transition: all .3s ease;
+.resultado-item:hover img {
+    transform: scale(1.12);
+    filter: drop-shadow(0 10px 20px rgba(91,67,67,0.3));
 }
 
-.fundamento-card:hover {
-    transform: translateY(-8px);
-    
+.resultado-item.selected img {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 14px rgba(225,171,4,0.8));
 }
 
-.fundamento-card h3 {
+.resultado-item.selected span {
+    color: #e1ab04;
+}
+
+.resultado-instruccion {
+    font-family: "obliqua", sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #5b4343;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 500px;
+
+    position: relative;
+    top: 20px;
+    left: 150px;
+
+    opacity: 0.5;
+    cursor: default;
+}
+/* ===================================== */
+/* CELEBRACIÓN AL ELEGIR                 */
+/* ===================================== */
+.celebracion-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 50;
+    transition: opacity 0.3s ease;
+}
+
+.celebracion-overlay.visible {
+    opacity: 1;
+}
+
+.celebracion-texto {
     font-family: "Konkhmer Sleokchher", serif;
-    color: #60b44f;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    
+    font-size: 3rem;
+    color: #e1ab04;
+    text-shadow: 0 4px 20px rgba(225,171,4,0.5);
+    transform: scale(0.5);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
 }
 
-.fundamento-card p {
-    font-family: "obliqua", sans-serif;
-    color: rgba(0,0,0,.7);
-    line-height: 1.7;
-    text-align: left;
-    
+.celebracion-overlay.visible .celebracion-texto {
+    transform: scale(1);
+    opacity: 1;
 }
 
-.fundamento-layout{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:80px;
+.confeti-particle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 51;
+    animation: confetiFly 1.4s ease-out forwards;
 }
 
-.fundamento-text{
-    flex:1;
-}
-
-#fundamento3d{
-    width:450px;
-    height:450px;
-    cursor:pointer;
+@keyframes confetiFly {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.6); opacity: 0; }
 }
 
 @media (max-width: 900px) {
-    .fundamento-grid {
-        grid-template-columns: 1fr;
-    }
+    .resultado-opciones { gap: 40px; }
+    .resultado-item img { width: 130px; }
+    .carta-concepto-img { width: 110px; }
 }
-
 
 /* ================================= */
 /* SECCIÓN NUEVA: GALERÍA PRINCIPAL  */
 /* ================================= */
+/* ================================= */
+/* VIDEO DENTRO DE GALERÍA           */
+/* ================================= */
+.video-frame {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 auto 50px;
+
+
+    filter: blur(0px);
+    box-shadow:
+        0 0 35px rgba(225, 219, 160, 0.55),
+        0 20px 45px rgba(0, 0, 0, 0.22);
+}
+
+.video-frame::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    z-index: -1;
+    border-radius: 30px;
+    background: inherit;
+    filter: blur(22px);
+}
+
+.video-frame iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+    border-radius: 12px;
+}
+
 .gallery-main-section {
     width: 100vw;
     min-height: 100vh;
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1251,19 +1371,30 @@ SECCIÓN CARTAS */
 }
 
 /* ======================================================== */
-/* SECCIÓN EXPERIENCIA: DISEÑO DE MANCHAS FLUIDAS (BLOBS)   */
-/* ======================================================== */
-
-/* ======================================================== */
 /* SECCIÓN EXPERIENCIA: CAPA PROTECTORA CONTRA CAÍDA DE FIGURAS */
 /* ======================================================== */
+
+/* ================================= */
+/* WRAPPER DE FONDO COMPARTIDO       */
+/* Envuelve fundamento + experiencia + pix con un único fondo  */
+/* sólido y los mismos blobs flotando de forma continua entre  */
+/* las tres secciones, sin cortes de color entre ellas.        */
+/* ================================= */
+.fondo-experiencia-wrapper {
+    position: relative;
+    width: 100vw;
+    background-color: #fcfbfa;
+    overflow: hidden;
+    z-index: 10;
+}
 
 .experiencia-section {
     width: 100vw;
     min-height: 100vh;
     
-    /* CRÍTICO: Debe tener un fondo sólido (no transparente) para tapar las figuras */
-    background-color: #fcfbfa !important; 
+    /* El fondo sólido ahora vive en .fondo-experiencia-wrapper para
+       que se extienda sin cortes desde fundamento hasta pix */
+    background-color: transparent;
     
     display: flex;
     justify-content: center;
@@ -1277,12 +1408,140 @@ SECCIÓN CARTAS */
     overflow: hidden; 
     padding: 40px 20px;
     box-sizing: border-box;
-        
-   
-    
 }
 
-#arrow{
+/* ──────────────────────────────────────────────────────────
+   NOTA DE LA CORRECCIÓN:
+   Aquí existía un bloque "html, body { overflow: hidden }" y un
+   "*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }"
+   que pertenecían a un mini-experimento aparte (el de #canvas/#stage/
+   #overlay). Esas reglas eran GLOBALES y chocaban con tus reglas de
+   arriba (html { overflow-y: auto !important; }), bloqueando el
+   scroll de toda la página.
+   
+   Se eliminaron esos selectores globales duplicados y se reescribieron
+   todos los selectores de ese experimento (#canvas, #stage, .piece,
+   #hint, #phase-info, #phase-name, #overlay, #arrow, .dot,
+   .composition-wrapper, #shapeComposition, .shape-piece) anidados
+   bajo ".experiencia-section" para que queden aislados y no vuelvan
+   a afectar el resto del sitio.
+   ────────────────────────────────────────────────────────── */
+
+.experiencia-section #canvas {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.experiencia-section #stage {
+  position: relative;
+  width: 560px;
+  height: 560px;
+}
+
+/* ── Pieces ── */
+.experiencia-section .piece {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.experiencia-section .piece img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Scroll hint ── */
+.experiencia-section #hint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: #aaa;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity 0.6s;
+  font-family: system-ui, sans-serif;
+}
+
+.experiencia-section #hint .chevron {
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  transform: rotate(45deg);
+  animation: chev 1.5s ease-in-out infinite;
+}
+
+@keyframes chev {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  50%       { transform: rotate(45deg) translate(3px, 3px); }
+}
+
+/* ── Phase dots ── */
+.experiencia-section #phase-info {
+  position: fixed;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.experiencia-section .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ddd;
+  transition: background 0.4s, transform 0.4s;
+}
+
+.experiencia-section .dot.on {
+  background: #444;
+  transform: scale(1.5);
+}
+
+/* ── Phase name ── */
+.experiencia-section #phase-name {
+  position: fixed;
+  bottom: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #bbb;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 10;
+  pointer-events: none;
+  font-family: system-ui, sans-serif;
+}
+
+/* ── Overlay (input capture) ── */
+.experiencia-section #overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  cursor: ns-resize;
+}
+
+.experiencia-section #arrow{
     position:absolute;
     left:35%;
     top:50%;
@@ -1293,7 +1552,7 @@ SECCIÓN CARTAS */
     pointer-events:none;
 }
 
-.composition-wrapper{
+.experiencia-section .composition-wrapper{
     width:100%;
     display:flex;
     justify-content:center;
@@ -1303,7 +1562,7 @@ SECCIÓN CARTAS */
     pointer-events:auto;
 }
 
-#shapeComposition{
+.experiencia-section #shapeComposition{
     position:relative;
     width:550px;
     height:350px;
@@ -1312,7 +1571,8 @@ SECCIÓN CARTAS */
 
     cursor:pointer;
 }
-.shape-piece{
+
+.experiencia-section .shape-piece{
     position:absolute;
 
     width:100px;
@@ -1328,6 +1588,7 @@ SECCIÓN CARTAS */
     user-select:none;
     pointer-events:none;
 }
+
 /* --- CONFIGURACIÓN DE LOS BLOBS (MANCHAS DE COLOR) --- */
 .blob {
     position: absolute;
@@ -1338,12 +1599,15 @@ SECCIÓN CARTAS */
     animation: floatBlobs 12s infinite alternate ease-in-out;
 }
 
-/* Asignación de tus 4 colores específicos y posiciones iniciales */
+/* Asignación de tus 4 colores específicos y posiciones iniciales.
+   Ahora distribuidos a lo largo de TODO el wrapper extendido
+   (fundamento + experiencia + pix), usando vh en vez de %
+   para que no se amontonen en los extremos del contenedor alto. */
 .blob-1 {
     width: 400px;
     height: 400px;
     background-color: #75cae7; /* Celeste */
-    top: -10%;
+    top: 5vh;
     left: -5%;
     animation-delay: 0s;
 }
@@ -1352,7 +1616,7 @@ SECCIÓN CARTAS */
     width: 500px;
     height: 500px;
     background-color: #60b44f; /* Verde */
-    bottom: -15%;
+    top: 95vh;
     right: -5%;
     animation-delay: 2s;
 }
@@ -1361,7 +1625,7 @@ SECCIÓN CARTAS */
     width: 350px;
     height: 350px;
     background-color: #e1ab04; /* Amarillo */
-    bottom: -10%;
+    top: 190vh;
     left: 15%;
     animation-delay: 4s;
 }
@@ -1370,7 +1634,7 @@ SECCIÓN CARTAS */
     width: 380px;
     height: 380px;
     background-color: #d12839; /* Rojo */
-    top: 10%;
+    top: 250vh;
     right: 20%;
     animation-delay: 6s;
 }
@@ -1388,47 +1652,52 @@ SECCIÓN CARTAS */
     }
 }
 
-/* --- CONTENEDOR ESMERILADO SOBRE LAS MANCHAS --- */
 .experiencia-container {
     position: relative;
-    z-index: 5; /* Se posiciona por encima de las manchas flotantes */
-    background: rgba(255, 255, 255, 0.4) !important; /* Más translúcido para dejar ver los colores */
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.4) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    
+
     border-radius: 30px !important;
     border: 1px solid rgba(255, 255, 255, 0.6) !important;
-    
+
     width: 100%;
-    max-width: 750px;
-    padding: 60px 40px;
+    max-width: 700px;
+    padding: 50px 40px;
     text-align: center;
     box-sizing: border-box;
     box-shadow: 0 30px 60px rgba(91, 67, 67, 0.08) !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px; /* antes dependía de los márgenes individuales, ahora controla el espacio entre título/texto/botón */
+    margin: 0 auto;
 }
 
 .experiencia-titulo {
     font-family: "Konkhmer Sleokchher", serif;
     font-size: clamp(2.0rem, 4.0vw, 3.5rem);
-    color: #5b4343; /* Tu color café oscuro para un contraste orgánico perfecto */
-    margin: 0 0 20px 0;
+    color: #D02638;
+    margin: 0; /* el espaciado ahora lo da el gap del contenedor */
     font-weight: 700;
+    text-align: center;
 }
 
 .experiencia-subtexto {
-    color: #5b4343;
+    font-family: "obliqua", sans-serif;
+    color: #604D41;
     font-size: clamp(1.05rem, 1.6vw, 1.25rem);
     line-height: 1.6;
-    margin: 0 0 px 0;
+    margin: 0; /* antes 0 0 30px 0 */
     font-weight: 500;
-    text-align: left;
+    text-align: center;
+    margin-top: -6px;
+    margin-left: 20px;
 }
-hjjjj
-/* ================================= */
-/* BOTÓN EXPERIENCIA 2 (GITHUB LINK) */
-/* ================================= */
 
-.btn-experiencia2 {
+.btn-experiencia {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -1437,102 +1706,552 @@ hjjjj
     text-decoration: none;
     cursor: pointer;
 
-    height: 95px;
-    width: 320px;
-
-    border-radius: 18px;
-    overflow: hidden;
-
-    /* estilo acorde a tu paleta */
-    background: linear-gradient(135deg, #5b4343, #3f2d2d);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-
-    box-shadow: 0 12px 28px rgba(91, 67, 67, 0.25);
-
-    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-}
-
-/* TEXTO */
-/* ================================= */
-/* BOTONES EXPERIENCIA (BASE) */
-/* ================================= */
-
-.btn-experiencia,
-.btn-experiencia2 {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    text-decoration: none;
-    cursor: pointer;
-
-    /* 🔽 MÁS PEQUEÑOS */
     height: 65px;
     width: 220px;
 
     border-radius: 16px;
 
-    /* 🔽 TRANSPARENTE */
     background: rgba(255, 255, 255, 0.08);
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* Borde difuminado para que se note como botón */
+    border: 1px solid rgba(91, 67, 67, 0.3);
+    box-shadow: 0 0 0 4px rgba(91, 67, 67, 0.08), 0 8px 20px rgba(91, 67, 67, 0.15);
 
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
     transition: all 0.3s ease;
+
+    margin-top: -2px; /* pequeño respiro extra sobre el gap general */
+    
 }
 
-/* TEXTO */
-.btn-experiencia span,
-.btn-experiencia2 span {
+.btn-experiencia span {
     font-family: "obliqua", sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    color: #5b4343;
+    color: #604D41; /* café claro */
     z-index: 2;
     transition: color 0.3s ease;
 }
 
-/* ================================= */
-/* HOVER (SE VUELVEN GRISES) */
-/* ================================= */
-
-.btn-experiencia:hover,
-.btn-experiencia2:hover {
-    background: rgba(120, 120, 120, 0.35);
-    border: 1px solid rgba(120, 120, 120, 0.5);
+.btn-experiencia:hover {
+    background: rgba(40, 30, 30, 0.75);
+    border: 1px solid rgba(40, 30, 30, 0.8);
+    box-shadow: 0 0 0 5px rgba(91, 67, 67, 0.12), 0 10px 25px rgba(91, 67, 67, 0.2);
     transform: translateY(-3px);
 }
 
-/* TEXTO EN HOVER */
-.btn-experiencia:hover span,
-.btn-experiencia2:hover span {
-    color: #f3ede3;
+.btn-experiencia:hover span {
+    color: #ffffff;
 }
 
 /* ================================= */
-/* RESPONSIVE */
+/* SECCIÓN PIX                       */
+/* Comparte el fondo continuo de .fondo-experiencia-wrapper */
 /* ================================= */
-
-@media (max-width: 1200px) {
-    .btn-experiencia,
-    .btn-experiencia2 {
-        width: 200px;
-        height: 60px;
-    }
+.pix-section {
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;        /* Igual que components-section/creditos-section: el
+                             nuevo texto + botón grande puede superar 100vh,
+                             así que dejamos crecer la sección en vez de
+                             recortarla con overflow:hidden. */
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    z-index: 999;
+    overflow: visible;
+    padding: 20px 20px 40px;
+    box-sizing: border-box;
 }
 
-@media (max-width: 650px) {
-    .btn-experiencia,
-    .btn-experiencia2 {
-        width: 100%;
-        height: 55px;
+.pix-container {
+    position: relative;
+    z-index: 5;
+    background: transparent;
+
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px 40px 50px;
+    text-align: center;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.pix-titulo {
+    font-family: "Konkhmer Sleokchher", serif;
+    font-size: clamp(2.0rem, 4.0vw, 3.5rem);
+    color: #5b4343;
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pix-subtexto {
+    font-family: "obliqua", sans-serif;
+    color: #5b4343;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.6;
+    margin: 10px 0 0; /* separación fija respecto al título PIX, sin depender del gap del contenedor */
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Marco con esquinas biseladas y redondeadas para el visualizador PiX,
+   sin borde de color: el iframe ocupa todo el marco directamente.
+   Caja alargada en altura tipo rectángulo. */
+.pix-viewer-frame {
+    --pix-bisel: 32px;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 16 / 11;
+    margin: 12px auto 0; /* separación fija respecto al párrafo, sin depender del gap del contenedor */
+    border-radius: var(--pix-bisel);
+    box-shadow: 0 20px 45px rgba(91, 67, 67, 0.18);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.pix-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border: none;
+}
+
+/* =====================================================
+   FUNDAMENTO — Animación de piezas morfológicas
+   ===================================================== */
+
+/* Sección completa */
+.fundamento-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 80px 40px;
+
+    /* El fondo sólido y los blobs ahora viven en .fondo-experiencia-wrapper,
+       que envuelve esta sección + experiencia + pix, dando continuidad
+       visual entre las tres sin cortes de color. */
+    background: transparent;
+
+    z-index: 10;
+}
+
+/* Layout interno: texto izquierda / animación derecha */
+.fundamento-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Columna de texto */
+.fundamento-text {
+    flex: 1;
+    max-width: 550px;
+}
+
+.fundamento-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin-bottom: 24px;
+    line-height: 1;
+    color: #D02638;
+}
+
+.fundamento-intro {
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    line-height: 1.75;
+    opacity: 0.85;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.fundamento-intro.is-changing {
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+/* Contenedor de la animación */
+.morph-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 560px;
+    height: 560px;
+}
+
+/* Stage: las piezas viven aquí */
+#stage {
+    position: absolute;
+    inset: 0;
+    width: 560px;
+    height: 560px;
+}
+
+/* Dots indicadores de fase */
+#phase-info {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.morph-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    transition: background 0.4s, transform 0.4s;
+}
+
+.morph-dot.on {
+    background: rgba(0, 0, 0, 0.6);
+    transform: scale(1.5);
+}
+
+/* Nombre de fase */
+#phase-name {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 10;
+    font-family: system-ui, sans-serif;
+}
+
+/* Hint de scroll */
+#hint {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 10;
+    transition: opacity 0.6s;
+    font-family: system-ui, sans-serif;
+}
+
+#hint .chevron {
+    width: 14px;
+    height: 14px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    animation: chevBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes chevBounce {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50%       { transform: rotate(45deg) translate(3px, 3px); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .fundamento-layout {
+        flex-direction: column;
+        gap: 40px;
     }
 
-    .btn-experiencia span,
-    .btn-experiencia2 span {
-        font-size: 0.95rem;
+    .fundamento-text {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .morph-wrapper {
+        width: 340px;
+        height: 340px;
+    }
+
+    #stage {
+        width: 340px;
+        height: 340px;
+    }
+}
+/* ================================= */
+/* SECCIÓN CRÉDITOS                  */
+/* Bloque superior (fondo claro): herramientas utilizadas.              */
+/* Franja inferior (crema sólido): figuras en fila + logos              */
+/* institucionales, según el mockup proporcionado.                      */
+/* ================================= */
+.creditos-section {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;        /* Igual que en components-section: el contenido (herramientas
+                             + franja de créditos) supera 100vh, así que dejamos que la
+                             sección crezca en vez de recortarse con overflow:hidden. */
+    /* Fondo sólido: tapa la lluvia de figuras (.fall-container, fixed)
+       que sigue cayendo y reciclándose por detrás de todo el sitio. */
+    background: #fffdfa;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;   /* Antes "hidden": cortaba la franja inferior de créditos
+                             cuando el snap anclaba el inicio de la sección. */
+    box-sizing: border-box;
+    z-index: 5;
+}
+
+/* ── Bloque superior: Herramientas utilizadas ── */
+.creditos-herramientas {
+    position: relative;
+    z-index: 6;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 60px 20px 40px;
+}
+
+/* Lluvia de figuras local: mismo mecanismo que .fall-container del hero
+   (animado en script.js vía la clase .fall-shape), pero "absolute" y
+   acotada al alto de este bloque en vez de "fixed" a toda la pantalla,
+   para que las piezas caigan únicamente detrás del botón Wiki, el
+   título "Herramientas utilizadas" y los logos h1-h5. */
+.fall-container-local {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.fall-container-local .fall-shape {
+    pointer-events: auto;
+    opacity: 0.55; /* más sutil que en el hero para no tapar el contenido */
+}
+
+/* El título, la fila de logos y el bloque Wiki (texto + botón) deben
+   quedar por encima de la lluvia de figuras */
+.creditos-herramientas-titulo,
+.creditos-herramientas-row,
+.pix-wiki-intro,
+.btn-wiki {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-wiki {
+    margin-top: -18px; /* compensa el gap del contenedor para que el margin-bottom controle la separación real */
+    margin-bottom: 70px; /* separa el botón Wiki del título "Herramientas utilizadas" */
+}
+
+/* Texto que antecede al botón Wiki, ahora dentro del bloque de créditos */
+.pix-wiki-intro {
+    font-family: "obliqua", sans-serif;
+    color: #5b4343;
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    font-weight: 600;
+    margin: 0 0 22px 0; /* separa el texto del botón Wiki que viene debajo */
+    align-self: stretch; /* asegura que el párrafo ocupe todo el ancho del flex padre, sin lo cual text-align:center no tiene espacio para centrar */
+    text-align: center !important;
+}
+
+/* Versión agrandada del botón Wiki */
+.btn-wiki-lg {
+    height: 104px;
+    width: min(380px, 90%);
+}
+
+.btn-wiki-lg span {
+    font-size: 1.5rem;
+}
+
+.creditos-herramientas-titulo {
+    font-family: "obliqua", sans-serif;
+    font-weight: 700;
+    color: #5b4343;
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    margin: 0;
+}
+
+.creditos-herramientas-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(28px, 5vw, 64px);
+}
+
+.herramienta-logo {
+    width: auto;
+    object-fit: contain;
+}
+
+/* Tamaño individual por logo: ajusta cada uno a tu gusto sin afectar
+   a los demás. Todos parten del mismo valor base (h5), cámbialos
+   libremente. */
+.herramienta-logo.h1 { height: clamp(34px, 16vw, 55px); }
+.herramienta-logo.h2 { height: clamp(34px, 12vw, 160px); }
+.herramienta-logo.h3 { height: clamp(34px, 4vw, 64px); }
+.herramienta-logo.h4 { height: clamp(34px, 8vw, 60px); }
+.herramienta-logo.h5 { height: clamp(34px, 2vw, 48px); }
+
+/* ── Franja inferior crema ── */
+.creditos-franja {
+    position: relative;
+    width: 100%;
+    background: #f3ede3;
+    padding: 50px 6vw 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    z-index: 6;
+}
+
+.creditos-figuras-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, 2.5vw, 28px);
+    flex-wrap: wrap;
+}
+
+.creditos-fig {
+    width: clamp(64px, 7vw, 96px);
+    height: auto;
+    object-fit: contain;
+}
+
+.creditos-footer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.creditos-logos-institucionales {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    justify-self: start;
+}
+
+.logo-pucv {
+    height: 78px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-ead {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+}
+
+.creditos-texto-proyecto {
+    text-align: center;
+    justify-self: center;
+}
+
+.creditos-texto-proyecto p {
+    font-family: "obliqua", sans-serif;
+    font-weight: 700;
+    color: #5b4343;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.creditos-texto-autor {
+    text-align: center;
+    justify-self: end;
+}
+
+.creditos-texto-autor p {
+    font-family: "obliqua", sans-serif;
+    font-weight: 700;
+    color: #5b4343;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.creditos-linea {
+    width: 100%;
+    height: 1px;
+    background: rgba(91, 67, 67, 0.35);
+}
+
+.creditos-copyright {
+    font-family: "obliqua", sans-serif;
+    font-weight: 500;
+    color: #5b4343;
+    opacity: 0.65;
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+    text-align: center;
+    margin: 4px 0 0;
+}
+
+@media (max-width: 900px) {
+    .creditos-footer-row {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 18px;
+    }
+    .creditos-logos-institucionales,
+    .creditos-texto-proyecto,
+    .creditos-texto-autor {
+        justify-self: center;
+        text-align: center;
+    }
+}
+/* ===================================== */
+/* REVELADO DE TEXTOS HACIA ARRIBA       */
+/* ===================================== */
+[data-reveal] {
+    opacity: 0;
+    transform: var(--reveal-base, none) translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+[data-reveal].reveal-in {
+    opacity: 1;
+    transform: var(--reveal-base, none) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }
