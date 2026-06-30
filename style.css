@@ -917,11 +917,11 @@ body {
     height: auto;
     display: block;
     pointer-events: none;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
 }
 
 .card-arrow.left img {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
 }
 
 .card-arrow:hover{
